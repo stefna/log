@@ -38,7 +38,7 @@ class MonologManager extends AbstractManager
 		return self::$monologInstances[self::MAIN_LOGGER];
 	}
 
-	public function pushProcessor(callable $callback, string $channel = null): static
+	public function pushProcessor(callable $callback, null|string $channel = null): static
 	{
 		if ($channel === null) {
 			array_unshift($this->monologProcessors, $callback);
@@ -53,7 +53,7 @@ class MonologManager extends AbstractManager
 		return $this;
 	}
 
-	public function pushHandler(HandlerInterface $handler, string $channel = null): static
+	public function pushHandler(HandlerInterface $handler, null|string $channel = null): static
 	{
 		if ($channel === null) {
 			array_unshift($this->monologHandlers, $handler);

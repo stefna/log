@@ -19,7 +19,7 @@ interface ManagerInterface
 	/**
 	 * @return static
 	 */
-	public function pushProcessor(callable $callback, string $channel = null): static;
+	public function pushProcessor(callable $callback, null|string $channel = null): static;
 
 	public function getLogger(string $channel, ?ConfigInterface $config = null): LoggerInterface;
 
