@@ -136,3 +136,23 @@ $logger->alert('Db connect error', [
 ]);
 ```
 
+
+## Using LogChannel with `stefna/di`
+
+This will add the channel to the logger context. 
+
+This is useful to filter logs
+
+```php
+<?php declare(strict_types=1);
+
+use Stefna\Logger\Di\Attributes\LogChannel;
+use Psr\Log\LoggerInterface;
+
+class SomeDomain {
+	public function __construct(
+		#[LogChannel('custom-channel')]
+		private LoggerInterface $logger
+	) {}
+}
+```
