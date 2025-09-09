@@ -156,3 +156,26 @@ class SomeDomain {
 	) {}
 }
 ```
+
+## Using DataDog processor
+
+This processor is meant to be used with the DataDog agent to send the stack trace to DataDog.
+
+And it also supports excluding frames from the stack trace. 
+This is useful if you have a lot of duplicate frames in the stack trace, and you don't want to send them to DataDog.
+It's also nice to remove framework code from the stack traces since in most cases it's not relevant.
+
+### Setup
+
+```php
+<?php declare(strict_types=1);
+
+use Stefna\Logger\Processor\DataDogProcessor;
+
+$processor = new DataDogProcessor([
+	[ // stack frames you aren't interested in. 
+		'file' => 'vendor/phpunit/phpunit/src/Framework/TestSuite.php',
+		'line' => 685, // optional, if not set all frames including the file will be excluded
+	],
+]);
+```
