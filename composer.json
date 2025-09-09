@@ -21,10 +21,8 @@
 		"psr/http-server-handler": "^1.0",
 		"psr/http-server-middleware": "^1.0",
 		"phpstan/phpstan": "^1.0",
-		"symfony/console": "^5.4 || ^4.0",
-		"polus/adr": "3.2.0",
-		"polus/router": "^1.0.0",
-		"bref/bref": "^0.5 || ^1.0"
+		"symfony/console": "^6.0",
+		"bref/bref": "^1.0 || ^2.0"
 	},
 	"autoload": {
 		"psr-4": {
