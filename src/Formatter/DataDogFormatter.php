@@ -23,6 +23,9 @@ final class DataDogFormatter extends JsonFormatter
 		 * } $data
 		 */
 		$data = parent::normalizeRecord($record);
+		if ($data['context'] instanceof \stdClass) {
+			$data['context'] = (array)$data['context'];
+		}
 		/**
 		 * @var array{
 		 *     exception?: mixed,
