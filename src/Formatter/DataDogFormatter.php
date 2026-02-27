@@ -68,6 +68,7 @@ final class DataDogFormatter extends JsonFormatter
 		}
 		if (!isset($data['logger'])) {
 			$data['logger'] = [
+				'level' => $record->level->getName(),
 				'channel' => $record->channel,
 				'message' => $record->message,
 			];
