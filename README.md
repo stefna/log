@@ -179,3 +179,41 @@ $processor = new DataDogProcessor([
 	],
 ]);
 ```
+
+## Tracking the current log context
+
+Sometimes you want context to be added automatically to all log entries, for example the current
+request id ("current plate") for the whole request scope.
+
+This can be done with `Stefna\Logger\LogContext` together with the `LogContextProcessor`. The
+processor needs to be registered once:
+
+```php
+<?php declare(strict_types=1);
+
+\Stefna\Logger\Logger::getManager()->pushProcessor(new \Stefna\Logger\Processor\LogContextProcessor());
+```
+
+Set a value for the current request scope:
+
+```php
+<?php declare(strict_types=1);
+
+\Stefna\Logger\LogContext::set('requestId', $request->getId());
+```
+
+Each key holds a single value. Use `unset()` to remove a key again:
+
+```php
+<?php declare(strict_types=1);
+
+\Stefna\Logger\LogContext::set('requestId', $request->getId());
+\Stefna\Logger\LogContext::set('requestId', $subRequest->getId());
+// all log entries in the sub-scope will include the sub request id
+\Stefna\Logger\LogContext::unset('requestId');
+// the request id is no longer tracked
+```
+
+Values tracked with `set()` are merged into the `context` of every log record processed by the
+`LogContextProcessor`. Keys set explicitly on a log call will override the tracked value for that
+call. Call `LogContext::clear()` at the end of the request or job to reset all state.
